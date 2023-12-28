@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merry Christmas</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+            /* Set the background color to black */
+            background-image: url('./christmast_bg.jpg');
+        }
+
+        #snowfall {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .snowflake {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: white;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: snowfallAnimation linear infinite;
+            animation-duration: 2s;
+        }
+
+        #gift-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            font-size: 50px;
+            /* Adjust the font size to make the gift box larger */
+            z-index: 1;
+        }
+
+        .gift {
+            animation: rotateGift linear infinite;
+            animation-duration: 4s;
+        }
+
+        #message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: #bd3634;
+            text-align: center;
+            z-index: 2;
+            max-width: 80%;
+            padding: 20px;
+        }
+
+        .message-letter {
+            font-family: cursive;
+            font-style: italic;
+            transform: rotate(10deg);
+            cursor: pointer;
+        }
+
+        .message-cover {
+            position: absolute;
+            z-index: -1;
+            top: -90px;
+            left: -120px;
+            width: 600px;
+        }
+
+        @keyframes snowfallAnimation {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        @keyframes rotateGift {
+            0% {
+                transform: rotateZ(0deg);
+            }
+
+            100% {
+                transform: rotateZ(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="snowfall"></div>
+    <div id="gift-box" onclick="showMessage()"><img class="gift" src="./gift.png" /></div>
+    <div id="message">
+        <img class="message-cover" src="./scroll.png" />
+        <p class="message-letter">
+            Merry Christmas Xuxu<br> 
+            You are my love, my angle!
+        </p>
+    </div>
+
+    <script>
+        // Snowfall effect
+        function createSnowflake() {
+            const snowflake = document.createElement("div");
+            snowflake.className = "snowflake";
+            snowflake.style.left = Math.random() * window.innerWidth + "px";
+            document.getElementById("snowfall").appendChild(snowflake);
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, 5000);
+        }
+
+        setInterval(createSnowflake, 100);
+
+        // Show message function
+        function showMessage() {
+            const giftBox = document.getElementById("gift-box");
+            const message = document.getElementById("message");
+
+            // Hide the gift box
+            giftBox.style.display = "none";
+
+            // Show the message
+            message.style.display = "block";
+
+            // You can customize the duration the message is displayed
+            setTimeout(() => {
+                // Show the gift box again
+                giftBox.style.display = "block";
+                message.style.display = "none";
+            }, 50000);
+        }
+    </script>
+</body>
+
+</html>
