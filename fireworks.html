@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #000;
+      min-height: 100vh;
+    }
+
+    .fireBlock {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      opacity: 0.7;
+      pointer-events: none;
+      border-radius: 15px;
+    }
+
+    @keyframes moveUp {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-300px);
+      }
+    }
+
+    @keyframes moveDown {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(300px);
+      }
+    }
+
+    @keyframes moveRight {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(300px);
+      }
+    }
+
+    @keyframes moveLeft {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-300px);
+      }
+    }
+
+    @keyframes moveTopLeft {
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+        transform: translate(-212px, -212px);
+      }
+    }
+
+    @keyframes moveTopRight {
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+        transform: translate(212px, -212px);
+      }
+    }
+
+    @keyframes moveBottomLeft {
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+        transform: translate(-212px, 212px);
+      }
+    }
+
+    @keyframes moveBottomRight {
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+        transform: translate(212px, 212px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  document.body.addEventListener("click", function(event) {
+    // console.log("Click event triggered at:", event.clientX, event.clientY);
+    createFireBlocks(event.clientX, event.clientY);
+  });
+
+  function createFireBlocks(x, y) {
+    createFireBlock(x, y, 'moveUp', '#ff0000');        // Red
+    createFireBlock(x, y, 'moveDown', '#00ff00');      // Green
+    createFireBlock(x, y, 'moveRight', '#0000ff');     // Blue
+    createFireBlock(x, y, 'moveLeft', '#ff00ff');      // Purple
+    createFireBlock(x, y, 'moveTopLeft', '#ffff00');   // Yellow
+    createFireBlock(x, y, 'moveTopRight', '#00ffff');  // Cyan
+    createFireBlock(x, y, 'moveBottomLeft', '#ff8000'); // Orange
+    createFireBlock(x, y, 'moveBottomRight', '#8000ff'); // Violet
+  }
+
+  function createFireBlock(x, y, animationName, color) {
+    // console.log("Creating fire block with animation:", animationName, "and color:", color);
+    const fireBlock = document.createElement("div");
+    fireBlock.className = "fireBlock";
+    fireBlock.style.left = x - 15 + "px";
+    fireBlock.style.top = y - 15 + "px";
+    fireBlock.style.background = color;
+    fireBlock.style.animation = `${animationName} 0.5s linear`;
+    document.body.appendChild(fireBlock);
+
+    setTimeout(() => {
+      document.body.removeChild(fireBlock);
+    }, 500);
+  }
+</script>
+
+</body>
+</html>
