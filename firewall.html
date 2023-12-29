@@ -8,26 +8,51 @@
       margin: 0;
       overflow: hidden;
       background-color: #000;
-      min-height: 100vh; /* Set a minimum height to capture click events */
+      min-height: 100vh;
     }
 
-    #firewall {
+    .fireBlock {
       position: absolute;
       width: 50px;
-      height: 150px;
+      height: 50px;
       background-color: #ff0000;
       opacity: 0.7;
-      transform-origin: bottom;
-      animation: firewallAnimation 0.5s ease-out;
       pointer-events: none;
     }
 
-    @keyframes firewallAnimation {
+    @keyframes moveUp {
       0% {
-        transform: scaleY(0);
+        transform: translateY(0);
       }
       100% {
-        transform: scaleY(1);
+        transform: translateY(-150px);
+      }
+    }
+
+    @keyframes moveDown {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(150px);
+      }
+    }
+
+    @keyframes moveRight {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(150px);
+      }
+    }
+
+    @keyframes moveLeft {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-150px);
       }
     }
   </style>
@@ -37,21 +62,29 @@
 <script>
   document.body.addEventListener("click", function(event) {
     console.log("Click event triggered at:", event.clientX, event.clientY);
-    createFirewall(event.clientX, event.clientY);
+    createFireBlocks(event.clientX, event.clientY);
   });
 
-  function createFirewall(x, y) {
-    console.log("Creating firewall at:", x, y);
-    const firewall = document.createElement("div");
-    firewall.id = "firewall";
-    firewall.style.left = x - 25 + "px";
-    firewall.style.top = y - 150 + "px";
-    document.body.appendChild(firewall);
+  function createFireBlocks(x, y) {
+    createFireBlock(x, y, 'moveUp');
+    createFireBlock(x, y, 'moveDown');
+    createFireBlock(x, y, 'moveRight');
+    createFireBlock(x, y, 'moveLeft');
+  }
+
+  function createFireBlock(x, y, animationName) {
+    console.log("Creating fire block with animation:", animationName);
+    const fireBlock = document.createElement("div");
+    fireBlock.className = "fireBlock";
+    fireBlock.style.left = x - 25 + "px";
+    fireBlock.style.top = y - 25 + "px";
+    fireBlock.style.animation = `${animationName} 1s linear`;
+    document.body.appendChild(fireBlock);
 
     setTimeout(() => {
-      document.body.removeChild(firewall);
-      console.log("Firewall removed");
-    }, 500);
+      document.body.removeChild(fireBlock);
+      console.log("Fire block removed");
+    }, 1000);
   }
 </script>
 
