@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #000;
+    }
+
+    #firewall {
+      position: absolute;
+      width: 50px;
+      height: 150px;
+      background-color: #ff0000;
+      opacity: 0.7;
+      transform-origin: bottom;
+      animation: firewallAnimation 0.5s ease-out;
+      pointer-events: none;
+    }
+
+    @keyframes firewallAnimation {
+      0% {
+        transform: scaleY(0);
+      }
+      100% {
+        transform: scaleY(1);
+      }
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      document.body.addEventListener("click", function(event) {
+        console.log('firewall');
+        createFirewall(event.clientX, event.clientY);
+      });
+
+      function createFirewall(x, y) {
+        const firewall = document.createElement("div");
+        firewall.id = "firewall";
+        firewall.style.left = x - 25 + "px";
+        firewall.style.top = y - 150 + "px";
+        document.body.appendChild(firewall);
+
+        setTimeout(() => {
+          document.body.removeChild(firewall);
+        }, 500);
+      }
+    });
+  </script>
+</head>
+<body>
+
+</body>
+</html>
