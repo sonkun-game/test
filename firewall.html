@@ -30,28 +30,29 @@
       }
     }
   </style>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      document.body.addEventListener("click", function(event) {
-        console.log('firewall');
-        createFirewall(event.clientX, event.clientY);
-      });
-
-      function createFirewall(x, y) {
-        const firewall = document.createElement("div");
-        firewall.id = "firewall";
-        firewall.style.left = x - 25 + "px";
-        firewall.style.top = y - 150 + "px";
-        document.body.appendChild(firewall);
-
-        setTimeout(() => {
-          document.body.removeChild(firewall);
-        }, 500);
-      }
-    });
-  </script>
 </head>
 <body>
+
+<script>
+  document.body.addEventListener("click", function(event) {
+    console.log("Click event triggered at:", event.clientX, event.clientY);
+    createFirewall(event.clientX, event.clientY);
+  });
+
+  function createFirewall(x, y) {
+    console.log("Creating firewall at:", x, y);
+    const firewall = document.createElement("div");
+    firewall.id = "firewall";
+    firewall.style.left = x - 25 + "px";
+    firewall.style.top = y - 150 + "px";
+    document.body.appendChild(firewall);
+
+    setTimeout(() => {
+      document.body.removeChild(firewall);
+      console.log("Firewall removed");
+    }, 500);
+  }
+</script>
 
 </body>
 </html>
